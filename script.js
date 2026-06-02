@@ -18,13 +18,27 @@ function toggleMobilePanel() {
     container.classList.toggle("right-panel-active");
 }
 
-// Redirect to dashboard on form submission
+// Simulate login process and redirect to dashboard
 document.getElementById('login-form').addEventListener('submit', (e) => {
     e.preventDefault();
-    window.location.href = 'dashboard.html';
+    const btn = e.target.querySelector('button[type="submit"]');
+    btn.textContent = 'Logging in...';
+    btn.style.opacity = '0.7';
+    btn.disabled = true;
+    
+    setTimeout(() => {
+        window.location.href = 'dashboard.html';
+    }, 1200);
 });
 
 document.getElementById('signup-form').addEventListener('submit', (e) => {
     e.preventDefault();
-    window.location.href = 'dashboard.html';
+    const btn = e.target.querySelector('button[type="submit"]');
+    btn.textContent = 'Creating Account...';
+    btn.style.opacity = '0.7';
+    btn.disabled = true;
+    
+    setTimeout(() => {
+        window.location.href = 'dashboard.html';
+    }, 1200);
 });
