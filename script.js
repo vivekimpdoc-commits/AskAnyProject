@@ -18,13 +18,13 @@ function toggleMobilePanel() {
     container.classList.toggle("right-panel-active");
 }
 
-// Prevent default form submission for demo
+// Redirect to dashboard on form submission
 document.getElementById('login-form').addEventListener('submit', (e) => {
     e.preventDefault();
-    alert('Log in logic will go here!');
+    window.location.href = 'dashboard.html';
 });
 
 document.getElementById('signup-form').addEventListener('submit', (e) => {
     e.preventDefault();
-    alert('Sign up logic will go here!');
+    window.location.href = 'dashboard.html';
 });
