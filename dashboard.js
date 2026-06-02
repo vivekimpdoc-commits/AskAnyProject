@@ -83,11 +83,23 @@ function isAiProject(topic) {
 function generateMockData(topic, isAi) {
     if (isAi) {
         return {
-            architecture: ["Python & FastAPI", "PyTorch / TensorFlow", "React.js Frontend", "PostgreSQL + Vector DB"],
-            features: ["Natural Language Processing", "Real-time inference", "Scalable cloud deployment"],
-            compute: ["NVIDIA A100 / H100 GPUs", "Large annotated datasets", "High memory capacity (RAM)"],
-            pros: ["High accuracy and task automation.", "Scales effortlessly with big data."],
-            cons: ["Requires extremely high compute cost.", "Prone to hallucination or bias."]
+            title: `Blueprint: ${topic}`,
+            feasibility: "85%",
+            timeToMvp: "8-12 Weeks",
+            budget: "$5,000 - $10,000",
+            pipeline: ["Data Ingestion & Cleaning", "Model Training / Fine-tuning", "FastAPI Backend Integration", "React/Next.js User Interface"],
+            techStack: [
+                { category: "Frontend & UI", tools: ["React.js", "Tailwind CSS", "Framer Motion"] },
+                { category: "AI & Machine Learning", tools: ["PyTorch / TensorFlow", "HuggingFace", "OpenAI / Anthropic APIs"] },
+                { category: "Infrastructure & DB", tools: ["PostgreSQL", "Pinecone (Vector DB)", "AWS / Docker"] }
+            ],
+            steps: [
+                "Define the specific use case, target audience, and required dataset.",
+                "Set up the data ingestion pipeline and clean the training data.",
+                "Develop and fine-tune the core AI model or integrate APIs.",
+                "Build scalable backend microservices to handle inference requests.",
+                "Design and deploy the user interface with real-time feedback."
+            ]
         };
     } else {
         return {
@@ -110,59 +122,84 @@ function populateResults(topic, data, isAi) {
         // AI PROJECT DYNAMIC TEMPLATE
         // ----------------------------------------------------
         dynamicResultsContainer.innerHTML = `
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <!-- Architecture -->
-                <div class="bg-indigo-50 dark:bg-indigo-900/20 rounded-2xl p-6 border border-indigo-200 dark:border-indigo-800/50 hover:shadow-lg transition-all">
-                    <div class="flex items-center gap-3 mb-4 text-indigo-600 dark:text-indigo-400">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
-                        <h3 class="text-xl font-bold text-slate-900 dark:text-white">Architecture & Stack</h3>
+            <div class="flex flex-col gap-8">
+                <!-- Top Metrics Row -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-gradient-to-br from-blue-500 to-indigo-600 rounded-3xl p-8 text-white shadow-xl relative overflow-hidden transform hover:-translate-y-1 transition-all duration-300">
+                        <div class="absolute -right-4 -top-4 opacity-20"><svg class="w-32 h-32" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd"></path></svg></div>
+                        <h4 class="text-blue-100 font-bold uppercase tracking-wider text-sm mb-2">Feasibility Score</h4>
+                        <div class="text-5xl font-black">\${data.feasibility}</div>
                     </div>
-                    <ul class="space-y-3">
-                        ${data.architecture.map(item => `<li class="flex items-start gap-2 text-slate-700 dark:text-slate-300"><span class="text-indigo-500">•</span> ${item}</li>`).join('')}
-                    </ul>
+                    <div class="bg-gradient-to-br from-emerald-500 to-teal-600 rounded-3xl p-8 text-white shadow-xl relative overflow-hidden transform hover:-translate-y-1 transition-all duration-300">
+                        <div class="absolute -right-4 -top-4 opacity-20"><svg class="w-32 h-32" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path></svg></div>
+                        <h4 class="text-emerald-100 font-bold uppercase tracking-wider text-sm mb-2">Time to MVP</h4>
+                        <div class="text-5xl font-black">\${data.timeToMvp}</div>
+                    </div>
+                    <div class="bg-gradient-to-br from-amber-500 to-orange-600 rounded-3xl p-8 text-white shadow-xl relative overflow-hidden transform hover:-translate-y-1 transition-all duration-300">
+                        <div class="absolute -right-4 -top-4 opacity-20"><svg class="w-32 h-32" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"></path><path fill-rule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clip-rule="evenodd"></path></svg></div>
+                        <h4 class="text-amber-100 font-bold uppercase tracking-wider text-sm mb-2">Estimated Budget</h4>
+                        <div class="text-5xl font-black">\${data.budget}</div>
+                    </div>
                 </div>
 
-                <!-- Features -->
-                <div class="bg-sky-50 dark:bg-sky-900/20 rounded-2xl p-6 border border-sky-200 dark:border-sky-800/50 hover:shadow-lg transition-all">
-                    <div class="flex items-center gap-3 mb-4 text-sky-600 dark:text-sky-400">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                        <h3 class="text-xl font-bold text-slate-900 dark:text-white">Core Features</h3>
+                <!-- Development Pipeline -->
+                <div class="bg-white dark:bg-slate-800 rounded-3xl p-8 border border-slate-200 dark:border-slate-700 shadow-sm mt-4">
+                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-8 flex items-center gap-3">
+                        <div class="p-2 bg-indigo-100 dark:bg-indigo-900/50 rounded-xl text-indigo-600 dark:text-indigo-400">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                        Development Pipeline
+                    </h3>
+                    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                        \${data.pipeline.map((step, idx) => \`
+                            <div class="flex-1 w-full bg-slate-50 dark:bg-slate-900/50 p-5 rounded-2xl border border-slate-100 dark:border-slate-700/50 text-center relative group hover:border-indigo-300 dark:hover:border-indigo-700 transition-colors shadow-sm hover:shadow-md">
+                                <div class="w-10 h-10 mx-auto bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold mb-4 shadow-lg">\${idx+1}</div>
+                                <p class="text-slate-800 dark:text-slate-200 font-semibold text-sm leading-relaxed">\${step}</p>
+                            </div>
+                            \${idx < data.pipeline.length - 1 ? \`<div class="hidden md:block text-slate-300 dark:text-slate-600 px-2"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg></div>\` : ''}
+                        \`).join('')}
                     </div>
-                    <ul class="space-y-3">
-                        ${data.features.map(item => `<li class="flex items-start gap-2 text-slate-700 dark:text-slate-300"><span class="text-sky-500">•</span> ${item}</li>`).join('')}
-                    </ul>
                 </div>
 
-                <!-- Compute Needs -->
-                <div class="bg-amber-50 dark:bg-amber-900/20 rounded-2xl p-6 border border-amber-200 dark:border-amber-800/50 hover:shadow-lg transition-all">
-                    <div class="flex items-center gap-3 mb-4 text-amber-600 dark:text-amber-400">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m14-6h2m-2 6h2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>
-                        <h3 class="text-xl font-bold text-slate-900 dark:text-white">Data & Compute</h3>
-                    </div>
-                    <ul class="space-y-3">
-                        ${data.compute.map(item => `<li class="flex items-start gap-2 text-slate-700 dark:text-slate-300"><span class="text-amber-500">•</span> ${item}</li>`).join('')}
-                    </ul>
+                <!-- Tech Stack Matrix -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+                    \${data.techStack.map(stack => \`
+                        <div class="bg-white dark:bg-slate-800 rounded-3xl p-8 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-xl transition-all">
+                            <h4 class="text-xl font-bold text-slate-900 dark:text-white mb-6 pb-4 border-b border-slate-100 dark:border-slate-700/50 flex items-center gap-2">
+                                <span class="text-indigo-500">❖</span> \${stack.category}
+                            </h4>
+                            <ul class="space-y-4">
+                                \${stack.tools.map(tool => \`
+                                    <li class="flex items-center gap-4 text-slate-700 dark:text-slate-300 font-medium text-lg">
+                                        <div class="p-1.5 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg text-emerald-600 dark:text-emerald-400">
+                                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                        </div>
+                                        \${tool}
+                                    </li>
+                                \`).join('')}
+                            </ul>
+                        </div>
+                    \`).join('')}
                 </div>
-            </div>
 
-            <!-- Balanced Analysis for AI -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-                <!-- Positive -->
-                <div class="bg-emerald-50 dark:bg-emerald-900/20 rounded-2xl p-6 border border-emerald-200 dark:border-emerald-800/50 hover:shadow-lg transition-all relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-1 h-full bg-emerald-500"></div>
-                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2"><span class="text-emerald-500">➕</span> AI Benefits</h3>
-                    <ul class="space-y-3">
-                        ${data.pros.map(item => `<li class="flex items-start gap-2 text-slate-700 dark:text-slate-300"><span class="text-emerald-500">✓</span> ${item}</li>`).join('')}
-                    </ul>
+                <!-- Execution Steps -->
+                <div class="bg-white dark:bg-slate-800 rounded-3xl p-8 border border-slate-200 dark:border-slate-700 shadow-sm mt-4">
+                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-8 flex items-center gap-3">
+                        <div class="p-2 bg-emerald-100 dark:bg-emerald-900/50 rounded-xl text-emerald-600 dark:text-emerald-400">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+                        </div>
+                        Execution Strategy
+                    </h3>
+                    <div class="space-y-4">
+                        \${data.steps.map((step, idx) => \`
+                            <div class="flex items-start gap-6 p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/30 border border-transparent hover:border-slate-200 dark:hover:border-slate-700 transition-all">
+                                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 flex items-center justify-center font-bold text-xl shadow-inner">\${idx+1}</div>
+                                <p class="text-slate-700 dark:text-slate-300 pt-2.5 text-lg font-medium leading-relaxed">\${step}</p>
+                            </div>
+                        \`).join('')}
+                    </div>
                 </div>
-                <!-- Negative -->
-                <div class="bg-rose-50 dark:bg-rose-900/20 rounded-2xl p-6 border border-rose-200 dark:border-rose-800/50 hover:shadow-lg transition-all relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-1 h-full bg-rose-500"></div>
-                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2"><span class="text-rose-500">➖</span> AI Challenges</h3>
-                    <ul class="space-y-3">
-                        ${data.cons.map(item => `<li class="flex items-start gap-2 text-slate-700 dark:text-slate-300"><span class="text-rose-500">✕</span> ${item}</li>`).join('')}
-                    </ul>
-                </div>
+
             </div>
         `;
     } else {
