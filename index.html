@@ -45,21 +45,18 @@
         <div class="form-container log-in-container">
             <form id="login-form">
                 <h1>Sign In</h1>
-                <div class="social-container">
-                    <a href="#" class="social" title="Google"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="24px" height="24px"><path fill="#fbc02d" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12	s5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24s8.955,20,20,20	s20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/><path fill="#e53935" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039	l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/><path fill="#4caf50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36	c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"/><path fill="#1565c0" d="M43.611,20.083L43.595,20L42,20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571	c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"/></svg></a>
-                    <a href="#" class="social" title="GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" width="24px" height="24px" fill="#ffffff"><path d="M15,3C8.373,3,3,8.373,3,15c0,5.623,3.872,10.328,9.092,11.63C12.692,26.746,12.8,26.27,12.8,25.861v-2.779	c-3.338,0.724-4.033-1.416-4.033-1.416c-0.546-1.387-1.333-1.756-1.333-1.756c-1.089-0.745,0.083-0.729,0.083-0.729	c1.205,0.084,1.839,1.237,1.839,1.237c1.07,1.834,2.807,1.304,3.492,0.997C12.956,20.613,13.36,20.04,13.805,19.72	c-2.664-0.303-5.466-1.332-5.466-5.93c0-1.31,0.465-2.38,1.235-3.22c-0.135-0.303-0.54-1.523,0.105-3.176	c0,0,1.005-0.322,3.3,1.23c0.96-0.267,1.98-0.399,3-0.405c1.02,0.006,2.04,0.138,3,0.405c2.28-1.552,3.285-1.23,3.285-1.23	c0.645,1.653,0.24,2.873,0.12,3.176c0.765,0.84,1.23,1.91,1.23,3.22c0,4.61-2.805,5.625-5.475,5.92c0.42,0.36,0.81,1.096,0.81,2.22	v3.293c0,0.419,0.108,0.896,0.72,0.745C23.124,25.322,27,20.62,27,15C27,8.373,21.627,3,15,3z"/></svg></a>
-                </div>
-                <span>or use your account</span>
+                <span style="margin-bottom: 20px;">Log in using OTP sent to your email</span>
                 
-                <div class="input-group">
-                    <input type="email" placeholder="Email" required />
+                <div class="input-group" id="login-email-group">
+                    <input type="email" id="login-email" placeholder="Email Address" required />
                 </div>
-                <div class="input-group">
-                    <input type="password" placeholder="Password" required />
-                </div>
-                <a href="#" class="forgot-password">Forgot your password?</a>
                 
-                <button type="submit">Sign In</button>
+                <div class="input-group" id="login-otp-group" style="display: none;">
+                    <input type="text" id="login-otp" placeholder="Enter 6-digit OTP" maxlength="6" />
+                </div>
+                
+                <button type="button" id="get-otp-btn" style="margin-top: 10px;">Get OTP</button>
+                <button type="submit" id="verify-otp-btn" style="display: none; margin-top: 10px;">Verify & Sign In</button>
                 <p class="mobile-toggle" onclick="toggleMobilePanel()">Don't have an account? Sign Up</p>
             </form>
         </div>
@@ -81,6 +78,6 @@
         </div>
     </main>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=3"></script>
 </body>
 </html>
