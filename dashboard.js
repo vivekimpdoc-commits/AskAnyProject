@@ -37,10 +37,8 @@ const resultsContainer = document.getElementById('results-container');
 const topicDisplay = document.getElementById('topic-display');
 
 // Elements to populate
-const execSummaryEl = document.getElementById('executive-summary');
-const keyFactsEl = document.getElementById('key-facts');
-const trendsTagsEl = document.getElementById('trends-tags');
-const sourceLinksEl = document.getElementById('source-links');
+const positivePointsEl = document.getElementById('positive-points');
+const negativePointsEl = document.getElementById('negative-points');
 
 searchForm.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -55,144 +53,70 @@ searchForm.addEventListener('submit', async (e) => {
     loadingState.classList.remove('hidden');
     loadingState.classList.add('flex');
     
-    // Scroll to loading spinner slightly
     loadingState.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
     // -------------------------------------------------------------
     // API INTEGRATION POINT
-    // -------------------------------------------------------------
-    // Replace the code below with your actual API fetch calls.
-    // Example for Google Search / Perplexity / LLM:
-    //
-    // try {
-    //     const response = await fetch('YOUR_API_ENDPOINT', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Authorization': 'Bearer YOUR_API_KEY',
-    //             'Content-Type': 'application/json'
-    //         },
-    //         body: JSON.stringify({ query: topic })
-    //     });
-    //     const data = await response.json();
-    //     // map data to the mockData format below
-    // } catch (err) {
-    //     console.error("API Fetch Failed", err);
-    // }
+    // Replace with real API call to LLM that generates Pros/Cons
     // -------------------------------------------------------------
 
-    // SIMULATED API CALL (Remove this when integrating real API)
+    // SIMULATED API CALL
     setTimeout(() => {
-        
-        // Mocked response generation based on the topic
         const mockData = generateMockData(topic);
-        
-        // Populate DOM
         populateResults(topic, mockData);
 
-        // Hide loading, Show results
         loadingState.classList.add('hidden');
         loadingState.classList.remove('flex');
         
         resultsContainer.classList.remove('hidden');
-        // Add a slight delay to allow display:block to apply before animating opacity
         setTimeout(() => {
             resultsContainer.classList.add('animate-fade-in-up');
+            resultsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }, 50);
         
-    }, 2500); // 2.5 seconds artificial delay
+    }, 2000); 
 });
 
 function populateResults(topic, data) {
     topicDisplay.textContent = topic;
     
-    // A) Executive Summary
-    execSummaryEl.innerHTML = data.summary;
-    
-    // B) Key Facts
-    keyFactsEl.innerHTML = '';
-    data.facts.forEach(fact => {
+    // Positive Points
+    positivePointsEl.innerHTML = '';
+    data.pros.forEach(pro => {
         const li = document.createElement('li');
-        li.className = "flex items-start gap-2";
+        li.className = "flex items-start gap-4";
         li.innerHTML = `
-            <svg class="w-5 h-5 text-indigo-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-            <span>${fact}</span>
+            <svg class="w-6 h-6 text-emerald-500 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+            <span class="font-medium text-lg leading-relaxed">${pro}</span>
         `;
-        keyFactsEl.appendChild(li);
+        positivePointsEl.appendChild(li);
     });
 
-    // C) Related Trends
-    trendsTagsEl.innerHTML = '';
-    data.trends.forEach(trend => {
-        const span = document.createElement('span');
-        span.className = "px-3 py-1 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-full text-sm font-medium border border-slate-200 dark:border-slate-600 hover:bg-indigo-50 hover:text-indigo-600 dark:hover:bg-indigo-900/30 dark:hover:text-indigo-400 transition-colors cursor-pointer";
-        span.textContent = trend;
-        
-        // Bonus: Make tags clickable to initiate a new search
-        span.addEventListener('click', () => {
-            topicInput.value = trend;
-            searchForm.dispatchEvent(new Event('submit'));
-        });
-        
-        trendsTagsEl.appendChild(span);
-    });
-
-    // D) Source Links
-    sourceLinksEl.innerHTML = '';
-    data.sources.forEach(source => {
-        const a = document.createElement('a');
-        a.href = source.url;
-        a.target = "_blank";
-        a.className = "flex items-center gap-3 p-3 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-indigo-300 dark:hover:border-indigo-500 bg-slate-50 dark:bg-slate-900/50 transition-colors group";
-        
-        // Extract domain name for a clean display
-        let domain = "";
-        try {
-            domain = new URL(source.url).hostname.replace('www.', '');
-        } catch(e) {
-            domain = "example.com";
-        }
-
-        a.innerHTML = `
-            <div class="w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-slate-500 dark:text-slate-400 group-hover:text-indigo-500 transition-colors">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
-            </div>
-            <div class="overflow-hidden">
-                <div class="font-medium text-slate-800 dark:text-slate-200 truncate">${source.title}</div>
-                <div class="text-xs text-slate-500 dark:text-slate-500 truncate">${domain}</div>
-            </div>
+    // Negative Points
+    negativePointsEl.innerHTML = '';
+    data.cons.forEach(con => {
+        const li = document.createElement('li');
+        li.className = "flex items-start gap-4";
+        li.innerHTML = `
+            <svg class="w-6 h-6 text-rose-500 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path></svg>
+            <span class="font-medium text-lg leading-relaxed">${con}</span>
         `;
-        sourceLinksEl.appendChild(a);
+        negativePointsEl.appendChild(li);
     });
 }
 
-// Utility to generate plausible mock data based on input
 function generateMockData(topic) {
-    const capitalized = topic.charAt(0).toUpperCase() + topic.slice(1);
-    
+    // Dynamically generating <10 word points
     return {
-        summary: `Based on the latest web data, <strong>${capitalized}</strong> has seen a significant surge in interest recently. This topic encompasses several critical technological and cultural shifts. Analysts suggest that continued development in this area will drastically impact industry standards over the next 3 to 5 years, making it a focal point for researchers and investors alike.`,
-        
-        facts: [
-            `Global search volume for "${topic}" increased by 45% in the last quarter.`,
-            `Key industry leaders have invested heavily in ${topic} related R&D this year.`,
-            `Recent studies indicate a strong correlation between ${topic} adoption and increased efficiency.`,
-            `The primary challenges identified include scalability, cost of entry, and regulatory compliance.`
+        pros: [
+            `Accelerates growth and innovation in ${topic}.`,
+            `Reduces manual effort significantly over time.`,
+            `Opens new investment opportunities globally.`
         ],
-        
-        trends: [
-            `${topic} best practices`,
-            `Future of ${topic}`,
-            `${topic} vs traditional methods`,
-            `Top tools for ${topic}`,
-            `Is ${topic} worth the hype?`,
-            `${topic} tutorial 2026`
-        ],
-        
-        sources: [
-            { title: `Comprehensive Guide to ${capitalized}`, url: `https://en.wikipedia.org/wiki/${encodeURIComponent(topic)}` },
-            { title: `Latest Research on ${capitalized}`, url: `https://scholar.google.com/search?q=${encodeURIComponent(topic)}` },
-            { title: `Industry Report: ${capitalized} Trends`, url: `https://techcrunch.com/search/${encodeURIComponent(topic)}` },
-            { title: `Community Discussions`, url: `https://www.reddit.com/r/technology/search?q=${encodeURIComponent(topic)}` }
+        cons: [
+            `Requires high initial setup costs.`,
+            `Vulnerable to unexpected regulatory changes.`,
+            `Demands a steep learning curve.`
         ]
     };
 }

@@ -75,8 +75,8 @@
         
         <!-- Search Section -->
         <div class="flex flex-col items-center mb-16 text-center">
-            <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-slate-900 dark:text-white">Research & Analyze</h1>
-            <p class="text-lg text-slate-600 dark:text-slate-400 mb-8 max-w-2xl">Enter any topic below. Our system will crawl the web, synthesize the data, and generate a comprehensive overview.</p>
+            <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-slate-900 dark:text-white">Balanced Analysis AI</h1>
+            <p class="text-lg text-slate-600 dark:text-slate-400 mb-8 max-w-2xl">Enter any topic below. Our AI will generate a structured, balanced analysis with short, impactful Positive and Negative points.</p>
             
             <form id="search-form" class="w-full max-w-3xl relative">
                 <div class="relative flex items-center shadow-lg rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 overflow-hidden focus-within:ring-2 focus-within:ring-indigo-500 focus-within:border-transparent transition-all">
@@ -89,7 +89,7 @@
                         type="text" 
                         id="topic-input"
                         class="w-full py-5 px-4 bg-transparent outline-none text-slate-900 dark:text-white text-lg placeholder-slate-400"
-                        placeholder="Enter Content Topic (e.g., Quantum Computing Advancements)"
+                        placeholder="Enter Content Topic (e.g., Artificial Intelligence)"
                         required
                         autocomplete="off"
                     >
@@ -97,7 +97,7 @@
                         type="submit" 
                         class="hidden md:flex absolute right-2 py-3 px-6 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-xl transition-colors items-center gap-2"
                     >
-                        Search & Analyze
+                        Analyze Topic
                     </button>
                 </div>
                 <!-- Mobile button -->
@@ -105,7 +105,7 @@
                     type="submit" 
                     class="md:hidden w-full mt-4 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-2xl shadow-lg transition-colors"
                 >
-                    Search & Analyze
+                    Analyze Topic
                 </button>
             </form>
         </div>
@@ -116,61 +116,45 @@
                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                 <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
             </svg>
-            <p class="mt-4 text-slate-600 dark:text-slate-400 font-medium animate-pulse text-lg">Synthesizing information...</p>
+            <p class="mt-4 text-slate-600 dark:text-slate-400 font-medium animate-pulse text-lg">Synthesizing balanced analysis...</p>
         </div>
 
         <!-- Results Section -->
-        <div id="results-container" class="hidden opacity-0">
-            <div class="mb-6">
-                <h2 class="text-2xl font-bold text-slate-800 dark:text-slate-100 border-b border-slate-200 dark:border-slate-700 pb-2">
-                    Analysis Results for: <span id="topic-display" class="text-indigo-600 dark:text-indigo-400 font-semibold"></span>
+        <div id="results-container" class="hidden opacity-0 mt-8">
+            <div class="mb-10 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-800 dark:text-slate-100">
+                    Balanced Analysis: <span id="topic-display" class="text-indigo-600 dark:text-indigo-400 border-b-2 border-indigo-600 pb-1"></span>
                 </h2>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
                 
-                <!-- A: Executive Summary -->
-                <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 md:col-span-2">
-                    <div class="flex items-center gap-3 mb-4 text-indigo-600 dark:text-indigo-400">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                        <h3 class="text-xl font-bold text-slate-900 dark:text-white">Executive Summary</h3>
+                <!-- ➕ Positive Points -->
+                <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-sm border border-slate-200 dark:border-slate-700 relative overflow-hidden group hover:shadow-xl transition-all hover:-translate-y-1">
+                    <div class="absolute top-0 left-0 w-1.5 h-full bg-emerald-500"></div>
+                    <div class="flex items-center gap-4 mb-6 text-emerald-600 dark:text-emerald-400">
+                        <div class="p-3 bg-emerald-50 dark:bg-emerald-900/30 rounded-xl">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4"></path></svg>
+                        </div>
+                        <h3 class="text-3xl font-bold text-slate-900 dark:text-white tracking-tight">Positive Points</h3>
                     </div>
-                    <p id="executive-summary" class="text-slate-600 dark:text-slate-300 leading-relaxed">
-                        <!-- Content injected via JS -->
-                    </p>
-                </div>
-
-                <!-- B: Key Facts & Data Points -->
-                <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700">
-                    <div class="flex items-center gap-3 mb-4 text-amber-500">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                        <h3 class="text-xl font-bold text-slate-900 dark:text-white">Key Facts & Data Points</h3>
-                    </div>
-                    <ul id="key-facts" class="space-y-3 text-slate-600 dark:text-slate-300">
+                    <ul id="positive-points" class="space-y-5 text-slate-700 dark:text-slate-300 mt-8">
                         <!-- Content injected via JS -->
                     </ul>
                 </div>
 
-                <!-- C: Related Sub-topics & Trends -->
-                <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700">
-                    <div class="flex items-center gap-3 mb-4 text-emerald-500">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"></path></svg>
-                        <h3 class="text-xl font-bold text-slate-900 dark:text-white">Related Trends</h3>
+                <!-- ➖ Negative Points -->
+                <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-sm border border-slate-200 dark:border-slate-700 relative overflow-hidden group hover:shadow-xl transition-all hover:-translate-y-1">
+                    <div class="absolute top-0 left-0 w-1.5 h-full bg-rose-500"></div>
+                    <div class="flex items-center gap-4 mb-6 text-rose-600 dark:text-rose-400">
+                        <div class="p-3 bg-rose-50 dark:bg-rose-900/30 rounded-xl">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M20 12H4"></path></svg>
+                        </div>
+                        <h3 class="text-3xl font-bold text-slate-900 dark:text-white tracking-tight">Negative Points</h3>
                     </div>
-                    <div id="trends-tags" class="flex flex-wrap gap-2">
+                    <ul id="negative-points" class="space-y-5 text-slate-700 dark:text-slate-300 mt-8">
                         <!-- Content injected via JS -->
-                    </div>
-                </div>
-
-                <!-- D: Source Links -->
-                <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200 dark:border-slate-700 md:col-span-2">
-                    <div class="flex items-center gap-3 mb-4 text-sky-500">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
-                        <h3 class="text-xl font-bold text-slate-900 dark:text-white">Source Links</h3>
-                    </div>
-                    <div id="source-links" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <!-- Content injected via JS -->
-                    </div>
+                    </ul>
                 </div>
 
             </div>
@@ -178,6 +162,6 @@
 
     </main>
 
-    <script src="dashboard.js"></script>
+    <script src="dashboard.js?v=2"></script>
 </body>
 </html>
