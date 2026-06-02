@@ -91,8 +91,13 @@ function generateMockData(topic, isAi) {
         };
     } else {
         return {
-            pros: [`Accelerates growth in ${topic}.`, `Reduces manual effort significantly.`, `Provides high ROI over time.`],
-            cons: [`Requires high initial setup costs.`, `Vulnerable to regulatory changes.`, `Demands a steep learning curve.`]
+            summary: `The domain of ${topic} is rapidly evolving, driven by modern technological advancements and shifting global demands. It offers immense long-term value and transformative potential.`,
+            insights: [
+                { title: "Market Growth", desc: "Projected 25% YoY increase, opening new global revenue streams." },
+                { title: "High Efficiency", desc: "Saves up to 40+ hours per week through intelligent automation." },
+                { title: "Future Proof", desc: "Builds a resilient foundation adaptable to changing market trends." }
+            ],
+            score: 88
         };
     }
 }
@@ -162,46 +167,54 @@ function populateResults(topic, data, isAi) {
         `;
     } else {
         // ----------------------------------------------------
-        // STANDARD PROS/CONS TEMPLATE
+        // PREMIUM LATEST TEMPLATE
         // ----------------------------------------------------
         dynamicResultsContainer.innerHTML = `
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
-                <!-- ➕ Positive Points -->
-                <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-sm border border-slate-200 dark:border-slate-700 relative overflow-hidden hover:shadow-xl transition-all">
-                    <div class="absolute top-0 left-0 w-1.5 h-full bg-emerald-500"></div>
-                    <div class="flex items-center gap-4 mb-6 text-emerald-600 dark:text-emerald-400">
-                        <div class="p-3 bg-emerald-50 dark:bg-emerald-900/30 rounded-xl">
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4"></path></svg>
+            <div class="flex flex-col gap-6">
+                <!-- Top Summary Card (Gradient + Glassmorphism) -->
+                <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 p-8 md:p-10 text-white shadow-2xl">
+                    <div class="absolute top-0 right-0 w-72 h-72 bg-white opacity-20 rounded-full blur-3xl transform translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
+                    <div class="absolute bottom-0 left-0 w-48 h-48 bg-white opacity-10 rounded-full blur-2xl transform -translate-x-1/2 translate-y-1/2 pointer-events-none"></div>
+                    
+                    <div class="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-10">
+                        <div class="flex-1">
+                            <div class="inline-block px-5 py-2 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-sm font-bold tracking-widest mb-6 shadow-sm">EXECUTIVE OVERVIEW</div>
+                            <p class="text-2xl md:text-4xl font-bold leading-snug mb-2">\${data.summary}</p>
                         </div>
-                        <h3 class="text-3xl font-bold text-slate-900 dark:text-white tracking-tight">Positive Points</h3>
+                        
+                        <!-- Impact Score Widget -->
+                        <div class="flex flex-col items-center justify-center p-8 bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] w-full lg:w-auto">
+                            <div class="relative flex items-center justify-center">
+                                <svg class="w-36 h-36 transform -rotate-90 drop-shadow-lg">
+                                    <circle cx="72" cy="72" r="60" fill="transparent" stroke="rgba(255,255,255,0.15)" stroke-width="12"></circle>
+                                    <circle cx="72" cy="72" r="60" fill="transparent" stroke="#ffffff" stroke-width="12" stroke-dasharray="377" stroke-dashoffset="\${377 - (377 * data.score / 100)}" stroke-linecap="round"></circle>
+                                </svg>
+                                <span class="absolute text-5xl font-black drop-shadow-md">\${data.score}</span>
+                            </div>
+                            <span class="text-sm uppercase tracking-widest mt-6 font-bold text-indigo-50 opacity-90">Impact Score</span>
+                        </div>
                     </div>
-                    <ul class="space-y-5 text-slate-700 dark:text-slate-300 mt-8">
-                        ${data.pros.map(item => `
-                            <li class="flex items-start gap-4">
-                                <svg class="w-6 h-6 text-emerald-500 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                                <span class="font-medium text-lg leading-relaxed">${item}</span>
-                            </li>
-                        `).join('')}
-                    </ul>
                 </div>
 
-                <!-- ➖ Negative Points -->
-                <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-sm border border-slate-200 dark:border-slate-700 relative overflow-hidden hover:shadow-xl transition-all">
-                    <div class="absolute top-0 left-0 w-1.5 h-full bg-rose-500"></div>
-                    <div class="flex items-center gap-4 mb-6 text-rose-600 dark:text-rose-400">
-                        <div class="p-3 bg-rose-50 dark:bg-rose-900/30 rounded-xl">
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M20 12H4"></path></svg>
+                <!-- Premium Insights Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+                    \${data.insights.map((insight, index) => {
+                        const colors = [
+                            { bg: 'bg-blue-50 dark:bg-blue-900/20', border: 'border-blue-200 dark:border-blue-800/50', iconBg: 'bg-blue-100 dark:bg-blue-900/50', iconColor: 'text-blue-600 dark:text-blue-400', iconPath: 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6' },
+                            { bg: 'bg-emerald-50 dark:bg-emerald-900/20', border: 'border-emerald-200 dark:border-emerald-800/50', iconBg: 'bg-emerald-100 dark:bg-emerald-900/50', iconColor: 'text-emerald-600 dark:text-emerald-400', iconPath: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z' },
+                            { bg: 'bg-amber-50 dark:bg-amber-900/20', border: 'border-amber-200 dark:border-amber-800/50', iconBg: 'bg-amber-100 dark:bg-amber-900/50', iconColor: 'text-amber-600 dark:text-amber-400', iconPath: 'M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z' }
+                        ];
+                        const theme = colors[index % colors.length];
+                        return \`
+                        <div class="group \${theme.bg} rounded-3xl p-8 border \${theme.border} hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                            <div class="w-16 h-16 rounded-2xl mb-6 flex items-center justify-center \${theme.iconBg} \${theme.iconColor} shadow-sm border border-white/50 dark:border-slate-700/50 transition-transform group-hover:scale-110">
+                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="\${theme.iconPath}"></path></svg>
+                            </div>
+                            <h4 class="text-2xl font-bold text-slate-900 dark:text-white mb-3">\${insight.title}</h4>
+                            <p class="text-slate-600 dark:text-slate-400 leading-relaxed font-medium">\${insight.desc}</p>
                         </div>
-                        <h3 class="text-3xl font-bold text-slate-900 dark:text-white tracking-tight">Negative Points</h3>
-                    </div>
-                    <ul class="space-y-5 text-slate-700 dark:text-slate-300 mt-8">
-                        ${data.cons.map(item => `
-                            <li class="flex items-start gap-4">
-                                <svg class="w-6 h-6 text-rose-500 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path></svg>
-                                <span class="font-medium text-lg leading-relaxed">${item}</span>
-                            </li>
-                        `).join('')}
-                    </ul>
+                        \`;
+                    }).join('')}
                 </div>
             </div>
         `;
