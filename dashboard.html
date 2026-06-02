@@ -56,11 +56,11 @@
             </div>
             <div class="flex items-center gap-4">
                 <button id="theme-toggle" class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors focus:outline-none" aria-label="Toggle Dark Mode">
-                    <!-- Sun Icon (Hidden in Light Mode) -->
+                    <!-- Sun Icon -->
                     <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-amber-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4.22 2.32a1 1 0 011.415 0l.708.707a1 1 0 01-1.414 1.415l-.707-.708a1 1 0 010-1.414zm3.78 4.68a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM2 10a1 1 0 011-1h1a1 1 0 110 2H3a1 1 0 01-1-1zm14.535 5.28a1 1 0 010 1.415l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 0zM10 15a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zm-5.636-2.95a1 1 0 011.414 0l.707.707a1 1 0 01-1.414 1.414l-.707-.707a1 1 0 010-1.414zM4.464 4.464a1 1 0 011.414 0l.707.707a1 1 0 01-1.414 1.415L4.464 5.88a1 1 0 010-1.415z" clip-rule="evenodd"></path>
                     </svg>
-                    <!-- Moon Icon (Hidden in Dark Mode) -->
+                    <!-- Moon Icon -->
                     <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-slate-700" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
                     </svg>
@@ -75,8 +75,8 @@
         
         <!-- Search Section -->
         <div class="flex flex-col items-center mb-16 text-center">
-            <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-slate-900 dark:text-white">Balanced Analysis AI</h1>
-            <p class="text-lg text-slate-600 dark:text-slate-400 mb-8 max-w-2xl">Enter any topic below. Our AI will generate a structured, balanced analysis with short, impactful Positive and Negative points.</p>
+            <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-slate-900 dark:text-white">Dynamic AI Analyzer</h1>
+            <p class="text-lg text-slate-600 dark:text-slate-400 mb-8 max-w-2xl">Enter any topic. If it's an AI Project, the layout will magically morph to show Architecture, Features, Compute Needs, and Analysis.</p>
             
             <form id="search-form" class="w-full max-w-3xl relative">
                 <div class="relative flex items-center shadow-lg rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 overflow-hidden focus-within:ring-2 focus-within:ring-indigo-500 focus-within:border-transparent transition-all">
@@ -89,7 +89,7 @@
                         type="text" 
                         id="topic-input"
                         class="w-full py-5 px-4 bg-transparent outline-none text-slate-900 dark:text-white text-lg placeholder-slate-400"
-                        placeholder="Enter Content Topic (e.g., Artificial Intelligence)"
+                        placeholder="e.g. Electric Cars (Generic) OR Medical Chatbot LLM (AI Project)"
                         required
                         autocomplete="off"
                     >
@@ -116,52 +116,21 @@
                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                 <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
             </svg>
-            <p class="mt-4 text-slate-600 dark:text-slate-400 font-medium animate-pulse text-lg">Synthesizing balanced analysis...</p>
+            <p class="mt-4 text-slate-600 dark:text-slate-400 font-medium animate-pulse text-lg">Synthesizing intelligent layout...</p>
         </div>
 
-        <!-- Results Section -->
-        <div id="results-container" class="hidden opacity-0 mt-8">
-            <div class="mb-10 text-center">
-                <h2 class="text-3xl md:text-4xl font-bold text-slate-800 dark:text-slate-100">
-                    Balanced Analysis: <span id="topic-display" class="text-indigo-600 dark:text-indigo-400 border-b-2 border-indigo-600 pb-1"></span>
-                </h2>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
-                
-                <!-- ➕ Positive Points -->
-                <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-sm border border-slate-200 dark:border-slate-700 relative overflow-hidden group hover:shadow-xl transition-all hover:-translate-y-1">
-                    <div class="absolute top-0 left-0 w-1.5 h-full bg-emerald-500"></div>
-                    <div class="flex items-center gap-4 mb-6 text-emerald-600 dark:text-emerald-400">
-                        <div class="p-3 bg-emerald-50 dark:bg-emerald-900/30 rounded-xl">
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4"></path></svg>
-                        </div>
-                        <h3 class="text-3xl font-bold text-slate-900 dark:text-white tracking-tight">Positive Points</h3>
-                    </div>
-                    <ul id="positive-points" class="space-y-5 text-slate-700 dark:text-slate-300 mt-8">
-                        <!-- Content injected via JS -->
-                    </ul>
-                </div>
-
-                <!-- ➖ Negative Points -->
-                <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-sm border border-slate-200 dark:border-slate-700 relative overflow-hidden group hover:shadow-xl transition-all hover:-translate-y-1">
-                    <div class="absolute top-0 left-0 w-1.5 h-full bg-rose-500"></div>
-                    <div class="flex items-center gap-4 mb-6 text-rose-600 dark:text-rose-400">
-                        <div class="p-3 bg-rose-50 dark:bg-rose-900/30 rounded-xl">
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M20 12H4"></path></svg>
-                        </div>
-                        <h3 class="text-3xl font-bold text-slate-900 dark:text-white tracking-tight">Negative Points</h3>
-                    </div>
-                    <ul id="negative-points" class="space-y-5 text-slate-700 dark:text-slate-300 mt-8">
-                        <!-- Content injected via JS -->
-                    </ul>
-                </div>
-
-            </div>
+        <!-- Results Header -->
+        <div id="results-header" class="hidden opacity-0 mb-10 text-center transition-opacity duration-500">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-800 dark:text-slate-100">
+                Analysis for: <span id="topic-display" class="text-indigo-600 dark:text-indigo-400 border-b-2 border-indigo-600 pb-1"></span>
+            </h2>
         </div>
+
+        <!-- Dynamic Results Container (Injected via JS) -->
+        <div id="dynamic-results-container" class="opacity-0"></div>
 
     </main>
 
-    <script src="dashboard.js?v=2"></script>
+    <script src="dashboard.js?v=3"></script>
 </body>
 </html>
